@@ -1,14 +1,11 @@
-package it.unibo.pc
-
-import it.unibo.pc.ctmc.CTMC
+package it.unibo.pc.ctmc
 
 object StochasticChannel extends App {
-
-  enum State {
-    case IDLE, SEND, DONE, FAIL
+  object state extends Enumeration {
+    val IDLE, SEND, DONE, FAIL = Value
   }
-
-  import State.*
+  import state.*
+  type State = state.Value
 
   def stocChannel: CTMC[State] = CTMC.ofTransitions(
     (IDLE, 1.0, SEND),
@@ -16,9 +13,9 @@ object StochasticChannel extends App {
     (SEND, 200000.0, DONE),
     (SEND, 100000.0, FAIL),
     (FAIL, 100000.0, IDLE),
-    (DONE, 1.0, DONE),
+    (DONE, 1.0, DONE)
   )
 
   // example run
-  State.values.foreach(s => println(f"$s ${stocChannel.transitions(s)}"))
+  state.values.foreach(s => println(s.toString + " " + stocChannel.transitions(s)))
 }

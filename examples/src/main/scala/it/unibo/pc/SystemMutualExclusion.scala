@@ -1,6 +1,7 @@
 package it.unibo.pc
 
 import it.unibo.pc.SystemMutualExclusionion.state.Value
+import it.unibo.pc.fa.System
 
 object SystemMutualExclusionion extends App {
 
@@ -14,7 +15,7 @@ object SystemMutualExclusionion extends App {
   def mutualExclusion(size: Int): System[List[State]] = {
     def moveOne(l: List[State])(from: State, to: State): Set[List[State]] =
       for (i <- (0 until size).toSet if l(i) == from) yield l.updated(i, to)
-    System.ofFunction[List[State]] { case l =>
+    fa.System.ofFunction[List[State]] { case l =>
       moveOne(l)(N, T) ++
         moveOne(l)(C, N) ++
         (if (l.contains(C)) Set() else moveOne(l)(T, C))

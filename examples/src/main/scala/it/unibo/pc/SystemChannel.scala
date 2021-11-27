@@ -1,6 +1,7 @@
 package it.unibo.pc
 
 import it.unibo.pc.SystemChannel.state.Value
+import it.unibo.pc.fa.System
 
 object SystemChannel extends App {
 
@@ -14,7 +15,7 @@ object SystemChannel extends App {
   import state.*
 
   // System specification
-  def channel(): System[State] = System.ofTransitions(
+  def channel(): System[State] = fa.System.ofTransitions(
     IDLE -> SEND,
     SEND -> SEND,
     SEND -> DONE,

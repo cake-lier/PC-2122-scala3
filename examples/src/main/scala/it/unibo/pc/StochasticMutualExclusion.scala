@@ -15,7 +15,7 @@ object StochasticMutualExclusion extends App {
   }
 
   import Place.*
-  import SPN.*
+  import it.unibo.pc.spn.SPN.*
 
   val spn = SPN(
     (N, _ => 1.0, T, MultiSet.empty),
